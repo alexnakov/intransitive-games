@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<style>
+nav > li {
+  list-style: none;
+  border: 1px solid yellow;
+  display: inline-flex;
+  padding: 20px 60px;
+}
+
+.material-symbols-outlined {
+  padding-bottom: 0px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48,
+}
+</style>
+</style>
+
+<body style="display: flex; justify-content: center;">
+  <main style="border: 1px solid green; max-width: 1000px">
+    <header style="text-align: center; font-size: 50px; padding: 30px 0px; border: 1px solid red;">
+      MAS116 Group Project (Group 21)
+    </header>
+    <nav style="border: 1px solid red; display: flex; justify-content: center;">
+      <li><a>HOME</a></li>
+      <li><a>ROCK PAPER SCISSORS</a></li>
+      <li><a>PENNEY'S GAME</a></li>
+      <li><a>REFERENCES</a></li>
+    </nav>
+    <section style="margin: 0px 30px; border: 2px solid purple">
+      
+      <!-- All the content will go here -->
+
+      <h3 style="text-align: center">The simplest example of this phenoma is the well-known game rock-paper-scissors</h3>
+      <p>Strategy A: Play Rock.</p>
+      <p>Strategy B: Play Scissors.</p>
+      <p>Strategy C: Play Paper.</p>
+      <p>We know that Strategy A beats B (Rock beats Scissors), strategy B beats C (Scissors beats Paper) but strategy A (Paper beats Rock)<br>does <strong>not</strong> beat C.</p>
+      <p>These game conditions allow a loop to be formed between the strategies</p>
+      <p><strong>IMPORTANT: </strong>In rock-paper-scissors game, when we say rock beats scissors, we mean that the rock wins over scissors with 100% centainty. This is not necessarily the case with other games like Penney's Game</p>
+      <h4>Using the information above we can construct the following relationship</h4>
+      <p style="text-align: center">Arrow: Origin is a better strategy than the destination.</p>
+      <div class="diagram-wrapper" style="display: flex; justify-content: center">
+          <img src="rsp-loop.jpg" width="200px">
+      </div>
+      <h4 style="text-align: center">Let's see how the game plays out when 2 players choose randomly.</h3>
+      <p>
+        In the following program: 2 players play rock-paper-scissors against each other.
+        Both players choose a random strategy from the three. The program recorded how many times each player won and how many times the drew.
+        Press the run button <span class="material-symbols-outlined">play_arrow</span> to see the output from the program. 
+      </p>
+      <div class="iframe-container" style="padding: 0px 30px">
+        <iframe src="https://trinket.io/embed/python/bdfd8fb2a7" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+      </div>
+
+      <h3>Explaining the code</h3>
+      <ul>
+        <li>In line 18, it's shown that if your item on the loop is before the your opponent's, you gain a point.</li>
+        <li>The checking is done using modular arithmetic which has the identical loop properties.</li>
+        <li>From line 26, the statistics are calculated and displayed.</li>
+      </ul>
+
+      <h3>Conclusion</h3>
+      <p>It can be seen from the code that nothing interesting happens as you have a 50:50 chance of winning (excl. draw) when sticking to one strategy.</p>
+      <p>As this is a simple game, we can conclude our investigation here. A more interesting investigation into non-transitive games is Penney's Game.</p>
+
+      <!-- Content ends here -->
+    </section>
+
+
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+</head>
+
+<style>
+nav > li {
+  list-style: none;
+  border: 1px solid yellow;
+  display: inline-flex;
+  padding: 20px 60px;
+}
+</style>
+
+<body style="display: flex; justify-content: center;">
+  <main style="border: 1px solid green; max-width: 1000px">
+    <header style="text-align: center; font-size: 50px; padding: 30px 0px; border: 1px solid red;">
+      MAS116 Group Project (Group 21)
+    </header>
+    <nav style="border: 1px solid red; display: flex; justify-content: center;">
+      <li><a>HOME</a></li>
+      <li><a>ROCK PAPER SCISSORS</a></li>
+      <li><a>PENNEY'S GAME</a></li>
+      <li><a>REFERENCES</a></li>
+    </nav>
+    <section style="margin: 0px 30px; border: 2px solid purple">
+      <h3 style="text-align: center;">What are non-transitive (intrasitive) games?</h3>
+      <div>
+        Intrasitive games are games in which there are at least 3 strategies A, B and C. For a game to be non-transitive, it must satisfy the following conditions:
+        <ol>
+            <li>No 2 strategies can be the same (i.e. A cannot equal B)</li>
+            <li>Suppose strategy A is better than strategy B (A > B)</li>
+            <li>Suppose also strategy B is better than strategy C (B > C)</li>
+            <li>It is natural to deduce that if A > B and B > C, then A > C. However, in non-transitive games that is not the case!</li>
+            <li>Strategies are related by one or more loops</li>
+        </ol>
+        To illustrate the behaviour of non-transitive games, the games used to experiment will be <strong><i>Rock, Paper, Scissors</i></strong> & <strong><i>Penney's Game</i></strong>
+      </div>
+    </section>
+
+    <h4>The simplest example of this phenoma is the well-known game rock-paper-scissors</h4>
+    <p>Strategy A: Play Rock</p>
+    <p>Strategy B: Play Scissors</p>
+    <p>Strategy C: Play Paper</p>
+    <p>We know that Strategy A beats B, strategy B beats C but strategy A does <strong>not</strong> beat C.</p>
+    <p>These game conditions allow a loop to be formed between the strategies</p>
+    <p style="text-align: center">Arrow: Origin is a better strategy than the destination</p>
+    <div class="diagram-wrapper" style="display: flex; justify-content: center">
+        <img src="rsp-loop.jpg" width="200px">
+    </div>
+    <h5>Let's see how the game plays out when 2 players choose randomly.</h5>
+    <div style="background-color: yellow; height:50px; display: flex;
+    justify-content: space-around;">
+        <p>Player 1</p>
+        <p>Player 2</p>
+    </div>
+    <div style="background-color: red; height:100px; display: flex;
+    justify-content: space-around;">
+        <img src = "scissors.svg" alt="My Happy SVG" height="100px"/>
+        <img src = "paper.svg" alt="My Happy SVG" height="100px"/>
+    </div>
+    <div style="background-color: green; height:50px; display: flex;
+    justify-content: space-around;">
+        <p>50</p>
+        <p>50</p>
+    </div>
+
+    
+  </main>
+</body>
+</html>
