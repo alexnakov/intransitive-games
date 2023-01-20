@@ -34,13 +34,13 @@ nav > li {
 <body style="display: flex; justify-content: center;">
   <main style="border: 1px solid green; max-width: 1000px">
     <header style="text-align: center; font-size: 50px; padding: 30px 0px; border: 1px solid red;">
-      MAS116 Group Project (Group 21)
+      MAS116 Group Project (Group 25)
     </header>
     <nav style="border: 1px solid red; display: flex; justify-content: center;">
-      <li><a>HOME</a></li>
-      <li><a>ROCK PAPER SCISSORS</a></li>
-      <li><a>PENNEY'S GAME</a></li>
-      <li><a>REFERENCES</a></li>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="rps.html">ROCK PAPER SCISSORS</a></li>
+      <li><a href="penney.html">PENNEY'S GAME</a></li>
+      <li><a href="#">REFERENCES</a></li>
     </nav>
     <section style="margin: 0px 30px; border: 2px solid purple">
       
@@ -84,6 +84,8 @@ nav > li {
       <p>We are going to test the combinations against each other using the following Python Code. The reader can input the 3 letter combinations in lines 6 and 7 (in capitals) and press run to see percentage of wins after tossing a coin 1 million times. The code Picks a random letter in line 15 using a uniform distribution and makes a sequence. When the sequence is longer than 2 letters, the if statement in line 17 checks the last 3 characters whether they match any of the 2 combinations. This check is carried out on every toss.</p>
       <p>We changed the variables in lines 6 and 7 to generate 26 matches between the pairs and recorded their results in a table below.
       </p>
+
+      <!-- trinket comment out to not spam the API -->
 
       <div class="iframe-container" style="padding: 0px 30px; margin-bottom: 40px;">
         <iframe src="https://trinket.io/embed/python/3a19b6d9da" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
@@ -129,17 +131,31 @@ nav > li {
       <p>The diagram above shows how some combinations my superior than others however there is not a supreme combinations that is above all. These are the required properties for the game to be non-transitive.</p>
 
       <h3>Why does the method work? And how can we work out the probabilities between each pair?</h3>
-
+      
+      <!-- This is example of MathJax -->
       <p>
-        To show how the method works, we are going to cover a couple of cases. Let Player 1 choose some strategy ABC where A, B, C can be either Heads or Tails. Using the method, we would choose the strategy B'AB where B' means <strong>Not B</strong>.
+        Example of MathJax: When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+        $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
       </p>
-      <p style="border: 2px solid blue;">
-        $$Player\hspace{5px}1 = ABC$$
-        $$Player\hspace{5px}2 = B'AC$$
-        Case (1a):
-      </p>
+      <!-- This is example of MathJax -->
 
 
+      <div class="maths-explanation-container" style="border: 3px solid rgb(239, 103, 176); padding: 30px;">
+        <p>To show how the method works, we are going to cover a couple of cases when this method is used with an arbitrary combination of heads or tails of length 3.</p>
+        <p>Using the method we are going to generate the combination of Player 2</p>
+        <p style="text-indent: 30px">\(Let \ Player1 = ABC,\) where A, B and C are eaither heads or tails. </p>
+        <p style="text-indent: 30px">\(Let \ Player2 = B'AB,\) where B' is <strong>not B</strong></p>
+
+        <p>Case (1a): \(If \ A = B'\)</p>
+        <p style="text-indent: 30px">If A = B', we can rewrite the player combinations as follows (rewriting all As as B's).</p>
+
+        <p style="text-indent: 30px">\(Player1 = B'BC\) </p>
+        <p style="text-indent: 30px">\(Player2 = B'B'B\) </p>
+        <p>We are going to draw a tree diagram to see which combination is most likely to appear.</p>
+
+        <img src="AequalsNotB.svg" alt="">
+        <p></p>
+      </div>  
 
       <!-- Content ends here -->
     </section>
