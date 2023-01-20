@@ -46,7 +46,7 @@ nav > li {
       <h3>Another example of non-transitive games is Penney's game.</h3>
       <p>For the reader who does not know how Penney's game is played.</p>
       <p>This is a well-known gambling game where the odds are stacked against the bettor.</p>
-      <h4>This is how Penney's game is played</h4>
+      <h3>How is Penney's game played?</h3>
       <ul>
           <li><p>Two Players, choose a combination of 3 heads or tails</p></li>
           <li><p>For example, player 1 chooses the combination <u>HTH</u>. (Heads, Tails, Heads)<p></li>
@@ -60,13 +60,107 @@ nav > li {
       </ul>
       <hr>
       <h3>Are all combinations of equally advantageous, similar rock-paper-scissors?</h3>
-      <p>If one has studied Penney's game, they will find that this is not the case.</p>
+      <p>If one has studied Penney's game, they will find that this is not the case. There is a trick to always have a higher probability of winning in Penney's game. The trick is to force your opponent to announce their chosen combination first and then to chose our combination based on theirs.</p>
+      <p>It is <strong>important</strong> to note that the game is not decided when the strategies are presented, unlike rock paper scissors. It's obvious that in rock paper scissors, it would be ridiculous to allow your opponent to choose the item after you have shown your combination first since it's easy to see how they can win 100% of time without advanced math. Since Penney's game is decided by coin tosses following the announcement of the combination, it's easy to be deceived that it's a fair 50:50 game.</p>
+
+      <h3 id="penney-method">What is the method to always win at Penney's game?</h3>
+      <p>Assuming you opponent has announced their combination, you can following the following algorithm to generate a combination that has a higher probability than your opponent's</p>
+      <ul>
+        <li>Suppose your opponent chooses the combination HTH</li>
+        <li>You generated combination should be (opposite of their 2nd)(1st)(2nd) letter</li>
+        <li>The 3rd letter of their combination does not matter in the generation of your advantageous combination.</li>
+        <li>You're combination following the example should be HHT</li>
+      </ul>
+      <p>Below are two more examples on how to use this method</p>
+      <div class="image-wrapper" style="display: flex; justify-content: center;">
+        <img src="penney-gambling-examples.svg" alt="" style="height: 300px;">
+      </div> 
+
+      <h3>Let's test this method by pairing all combinations against each other.</h3>
+      <p>We are going to test the combinations against each other using the following Python Code. The reader can input the 3 letter combinations in lines 6 and 7 (in capitals) and press run to see percentage of wins after tossing a coin 1 million times. The code Picks a random letter in line 15 using a uniform distribution and makes a sequence. When the sequence is longer than 2 letters, the if statement in line 17 checks the last 3 characters whether they match any of the 2 combinations. This check is carried out on every toss.</p>
+      <p>We changed the variables in lines 6 and 7 to generate 26 matches between the pairs and recorded their results in a table below.
+      </p>
+
+      <div class="iframe-container" style="padding: 0px 30px; margin-bottom: 40px;">
+        <iframe src="https://trinket.io/embed/python/3a19b6d9da" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="image-wrapper" style="display: flex; justify-content: center;">
+        <div w3-include-html="penney-round-robin.html" style="border: 3px solid red;"></div>
+      </div>  
+
+      <h3>How to read this table?</h3>
+      <ul>
+        <li>The numbers in the cells are percentages of points won by the corresponding row combination against the corresponding column combination.</li>
+        <li>The cells coloured in green mean the row combination won by obtaining the cell percentage.</li>
+        <li>The cells coloured in red mean the row combination lost by obtaining the cell percentage.</li>
+        <li>Cells coloured in yellow which all have 50% are draws between combinations</li>
+        <li>Example 1: Cell <strong>D6</strong>, HTT (33%) [lost] vs HTT (67%) [won]</li>
+        <li>Example 2: Cell <strong>C9</strong>, TTH (70%) [won] vs HHH (30%) [lost]</li>
+      </ul>
+    
+      <a href="#penney-method">
+        <h3>Did the method we outlined above worked?</h3>
+      </a>
+      <p>If we pair all the combinations along with their transformed advantegous counter parts we get the following results.</p>
+      <p><strong>Note: Destination beats origin</strong></p>
+      <ul>
+        <li>HHH (12%) &#8594 THH (88%)</li>
+        <li>HHT (25%) &#8594 THH (75%)</li>
+        <li>HTH (33%) &#8594 HHT (67%)</li>
+        <li>HTT (33%) &#8594 HHT (67%)</li>
+        <li>THH (33%) &#8594 TTH (67%)</li>
+        <li>THT (33%) &#8594 TTH (67%)</li>
+        <li>TTH (25%) &#8594 HTT (75%)</li>
+        <li>TTT (12%) &#8594 HTT (88%)</li>
+      </ul>
+
+      <p>From our repetitive testing, we can see that the method clearly works with a minimum success rate of 67%.</p>
+      <p>We can create a diagram which shows the relation between all of the combinations using this method.</p>
+
+      <div class="image-wrapper" style="display: flex; justify-content: center;">
+        <img src="penney-intrasitive.svg" alt="" width="600px">
+      </div>
+      
+      <p>The diagram above shows how some combinations my superior than others however there is not a supreme combinations that is above all. These are the required properties for the game to be non-transitive.</p>
+
+      
 
       <!-- Content ends here -->
     </section>
 
-
-
   </main>
+
+  <script>
+    function includeHTML() {
+      var z, i, elmnt, file, xhttp;
+      /* Loop through a collection of all HTML elements: */
+      z = document.getElementsByTagName("*");
+      for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        /*search for elements with a certain atrribute:*/
+        file = elmnt.getAttribute("w3-include-html");
+        if (file) {
+          /* Make an HTTP request using the attribute value as the file name: */
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+              if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+              if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+              /* Remove the attribute, and call this function once more: */
+              elmnt.removeAttribute("w3-include-html");
+              includeHTML();
+            }
+          }
+          xhttp.open("GET", file, true);
+          xhttp.send();
+          /* Exit the function: */
+          return;
+        }
+      }
+    }
+
+    includeHTML();
+  </script>
 </body>
 </html>
