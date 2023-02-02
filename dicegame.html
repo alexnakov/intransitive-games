@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+</head>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<style>
+nav > li {
+  list-style: none;
+  border: 1px solid yellow;
+  display: inline-flex;
+  padding: 20px 60px;
+}
+</style>
+
+<body style="display: flex; justify-content: center;">
+  <main style="border: 1px solid green; max-width: 1000px">
+    <header style="text-align: center; font-size: 50px; padding: 30px 0px; border: 1px solid red;">
+      MAS116 Group Project (Group 25)
+    </header>
+    <nav style="border: 1px solid red; display: flex; justify-content: center;">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="rps.html">ROCK PAPER SCISSORS</a></li>
+      <li><a href="penney.html">PENNEY'S GAME</a></li>
+      <li><a href="dicegame.html">EFRON'S DICE</a></li>
+      <li><a href="#">REFERENCES</a></li>
+    </nav>
+    
+    <div align="center"><h1>Intransitive Dice - Efron's dice</h1></div>
+
+<br>
+<h3>How to play the game</h3>
+<ul>
+<li> There are four different die which can be chosen in this game, as shown below with their corresponding letter.</li> 
+<li> This is a two player game which involves the players choosing two differnt die to roll the highest score against each other.</li> 
+<li> These dice, as shown, are not regular dice; although they are standard cubes, and so the probability that each face is rolled is equal to $\frac{1}{6}$, they have different numbers on their faces when compared to the conventional dice.</li> 
+<li> The first player chooses one of the dice and the second chooses one of the remaining dice, rolling them and comparing scores,
+the winner has the higher score (same as the number on the 'top' of the dice).</li> 
+</ul>
+
+<div style="display: flex; justify-content: center">
+  <img src="options.svg" width="400px">
+</div>
+
+
+<p>The dice have the following values for each face on the dice:</p>
+<ul>
+<li>C = [3,3,3,3,3,3]</li> 
+<li>D = [4,4,4,4,0,0]</li> 
+<li>E = [5,5,5,1,1,1]</li> 
+<li>F = [6,6,2,2,2,2]</li> 
+</ul>
+
+<p>This game is an example of a <strong>non-transitive</strong> game. In this set of dice each dice rolls higher than another more than half the time, i.e. normally wins, and so satisfies
+the definiton. <cite>[1]</cite>.</p>
+
+<h3>Python Code</h3>
+<p>Below is a python code which provides the statistics of wins for each combination of die (forgive the delay for the graph):</p>
+<iframe src="https://trinket.io/embed/python3/7d1c1f99ac" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<p>The following paragraph will explain parts of the code and how it works.</p>
+
+<p>The 'total' variable is assigned a value of <em>1000000</em>, this is so that the probabilities generated are as close to the true value as possible. In lines <em>9-12</em> there are lists for the variables, <em>'c'</em>, <em>'d'</em>, <em>'e'</em> and <em>'f'</em>. They contain each face of their respective dice. 
+As the probability of any face appearing is $\frac{1}{6}$, choosing one of the values randomly has the same probability as rolling that number. From lines <em>27-43</em>, the letter each player inputs assigns the choice to a specific variable. As there are <em>4</em> different possible inputs
+for each player, <em>8</em> possible variables are needed.
+
+<pre class="prettyprint linenums">
+<code>
+if a_choice == 'c':                     
+    a_choice = c
+if a_choice == 'd':
+    a_choice = d 
+if a_choice == 'e':
+    a_choice = e
+if a_choice == 'f':
+    a_choice = f
+    
+if b_choice == 'c':
+    b_choice = c
+if b_choice == 'd':
+    b_choice = d 
+if b_choice == 'e':
+    b_choice = e
+if b_choice == 'f':
+    b_choice = f  
+</code>
+</pre>
+ Line <em>46</em> uses a <em>while</em> loop to repeat the rolls until the 'total' limit is hit. Lines <em>49</em> and <em>50</em> assigns one of the 'face' values of their corresponding dice, using the <em>random.choice()</em> function, from the lists of the corresponding dice.
+Lines <em>52-56</em> gives a 'point' to the dice that wins, as no two values of two different dice are the same, one dice will always win. This process is repeated till the limit is reached.
+
+<pre class="prettyprint linenums">
+<code>
+i = 0
+while i < total:
+    i = i + 1
+    
+    a_roll = random.choice(a_choice)                    
+    b_roll = random.choice(b_choice)
+    
+    if a_roll > b_roll:
+        a_score = a_score + 1                       
+        
+    if b_roll > a_roll:
+        b_score = b_score + 1
+</code>
+</pre>
+
+Lines <em>75-166</em> repeats the actions of lines <em>46-56</em>, however instead of using the players inputs, there are <em>6</em> similar loops, where the six different combinations are used
+, where <em>'a'</em> and 'b' are assigned a random item from the lists of the specific die. Finally, lines <em>170-175</em> showcase a table of values. The odds of winning for each dice in each pair are inserted into the <em>print</em> function, where a table is formatted. Just like previously,
+ the <em>.format()</em> function applies a <em>1d.p.</em> for each value.</p>
+
+
+<p>The graph at the end of the code gives, approximately, the odds of winning for each dice when played against the various other dice. These approximations
+are based on fractions which can be worked out to give the true probability of each win for each combination of two die. They are presented below:</p>
+<br>
+<br>
+<div align="center">
+
+<table>
+<thead>
+<tr>
+ <th></th>
+ <th width="22%"></th>
+ <th width="9%">C</th>
+ <th width="9%">D</th>
+ <th width="9%">E</th> 
+ <th width="9%">F</th>
+
+</tr>
+<tr>
+ <th width="45%">Odds of</th>
+ <th>C</th>
+ <th>---</th>
+ <th>$\frac{1}{3}$</th>
+ <th>$\frac{1}{2}$</th>
+ <th>$\frac{2}{3}$</th>
+</tr>
+<tr>
+ <th>winning</th>
+ <th>D</th>
+ <th>$\frac{2}{3}$</th>
+ <th>---</th>
+ <th>$\frac{1}{3}$</th>
+ <th>$\frac{4}{9}$</th>
+</tr>
+<tr>
+ <th>with each</th>
+ <th>E</th>
+ <th>$\frac{1}{2}$</th>
+ <th>$\frac{2}{3}$</th>
+ <th>---</th>
+ <th>$\frac{1}{3}$</th>
+</tr>
+<tr>
+ <th>dice %</th>
+ <th>F</th>
+ <th>$\frac{1}{3}$</th>
+ <th>$\frac{5}{9}$</th>
+ <th>$\frac{2}{3}$</th>
+ <th>---</th>
+</tr>
+</thead>
+
+</table>
+
+</div>
+<br>
+<br>
+
+
+<h3>The maths behind the statistics</h3>
+<p>The data collected can be explained using the probability of getting each various value for each dice, as each 'face' has an equally likely chance of $\frac{1}{6}$
+of rolling, and can be illustrated using tree diagrams, with dice E and D being used as an example:</p>
+
+<div style="display: flex; justify-content: center">
+  <img src="tree.svg" width="400px">
+</div>
+
+<p>If player A chooses dice E, and player B dice D, then as player A rolls first, if a <em>5</em> is rolled, a win is certain as all the faces on dice D are lower than <em>5</em>. If a <em>1</em> is rolled however, a win or loss is dependent on player B. If dice D rolls a <em>0</em>, which has a $\frac{2}{6}$ chance of rolling, player A wins again, however if a <em>4</em> is rolled, which has a $\frac{4}{6}$ chance of rolling, then player B wins.
+ So adding the two scenarios in which player A wins give the total probability that dice E wins, which is $\frac{2}{3}$, and the scenario that D wins is $\frac{1}{3}$.
+
+<p>Essentially all that is happening here is that you combine all the probabilities of situations where your dice wins to give the total probability or odds that your dice has
+a greater score. Tree diagrams can be used to calculate the probability of winning when choosing the second die for the various other die.</p>
+<p>By using the probability for each individual roll for each pair of die we get the following:
+<br>
+<ul>
+<li>C winning against D:  &nbsp Odds of D rolling a zero &nbsp $*$ &nbsp Odds of C rolling a three &nbsp $=$ &nbsp $\frac{2}{6} * 1$ &nbsp $=$ &nbsp $\frac{2}{6}$ &nbsp $=$ &nbsp $\frac{1}{3}$;<br> D winning against C: &nbsp Odds of D rolling a four &nbsp $*$ &nbsp Odds of C rolling a three &nbsp $=$ &nbsp $\frac{4}{6} * 1$ &nbsp $=$ &nbsp $\frac{4}{6}$ &nbsp $=$ &nbsp $\frac{2}{3}$ </li> <br><br>
+<li>C winning against E:  &nbsp Odds of E rolling a one &nbsp $*$ &nbsp Odds of C rolling a three &nbsp $=$ &nbsp $\frac{3}{6} * 1$ &nbsp $=$ &nbsp $\frac{3}{6}$ &nbsp $=$ &nbsp $\frac{1}{2}$;<br> E winning against C: &nbsp Odds of E rolling a five &nbsp $*$ &nbsp Odds of C rolling a three &nbsp $=$ &nbsp $\frac{3}{6} * 1$ &nbsp $=$ &nbsp $\frac{3}{6}$ &nbsp $=$ &nbsp $\frac{1}{2}$ </li> <br><br>
+<li>C winning against F:  &nbsp Odds of F rolling a two &nbsp $*$ &nbsp Odds of C rolling a three &nbsp $=$ &nbsp $\frac{4}{6} * 1$ &nbsp $=$ &nbsp $\frac{4}{6}$ &nbsp $=$ &nbsp $\frac{2}{3}$;<br> F winning against C: &nbsp Odds of F rolling a six &nbsp $*$ &nbsp Odds of C rolling a three &nbsp $=$ &nbsp $\frac{2}{6} * 1$ &nbsp $=$ &nbsp $\frac{2}{6}$ &nbsp $=$ &nbsp $\frac{1}{3}$ </li> <br><br>
+<li>D winning against E:  &nbsp Odds of D rolling a four &nbsp $*$ &nbsp Odds of E rolling a one &nbsp $=$ &nbsp $\frac{4}{6} * \frac{3}{6}$ &nbsp $=$ &nbsp $\frac{12}{36}$ &nbsp $=$ &nbsp $\frac{1}{3}$;<br> E winning against D: &nbsp Odds of E rolling a five &nbsp $*$ &nbsp $1$ &nbsp $+$ &nbsp Odds of E rolling a one &nbsp $*$ &nbsp Odds of D rolling a zero &nbsp $=$ &nbsp $\frac{3}{6} * 1$ &nbsp $+$ &nbsp $\frac{3}{6} * \frac{2}{6}$ &nbsp $=$ &nbsp $\frac{3}{6}$ &nbsp $+$ &nbsp $\frac{1}{6}$ &nbsp $=$ &nbsp $\frac{2}{3}$</li><br><br>
+<li>D winning against F:  &nbsp Odds of D rolling a four &nbsp $*$ &nbsp Odds of F rolling a zero &nbsp $=$ &nbsp $\frac{4}{6} * \frac{4}{6}$ &nbsp $=$ &nbsp $\frac{16}{36}$ &nbsp $=$ &nbsp $\frac{4}{9}$;<br> F winning against D: &nbsp Odds of F rolling a six &nbsp $*$ &nbsp $1$ &nbsp $+$ &nbsp Odds of F rolling a two &nbsp $*$ &nbsp Odds of D rolling a zero &nbsp $=$ &nbsp $\frac{2}{6} * 1$ &nbsp $+$ &nbsp $\frac{4}{6} * \frac{2}{6}$ &nbsp $=$ &nbsp $\frac{2}{6}$ &nbsp $+$ &nbsp $\frac{8}{36}$ &nbsp $=$ &nbsp $\frac{5}{9}$</li> <br><br>
+<li>E winning against F:  &nbsp Odds of E rolling a five &nbsp $*$ &nbsp Odds of F rolling a zero &nbsp $=$ &nbsp $\frac{3}{6} * \frac{4}{6}$ &nbsp $=$ &nbsp $\frac{12}{36}$ &nbsp $=$ &nbsp $\frac{1}{3}$;<br> F winning against E: &nbsp Odds of F rolling a six &nbsp $*$ &nbsp $1$ &nbsp $+$ &nbsp Odds of F rolling a two &nbsp $*$ &nbsp Odds of E rolling a one &nbsp $=$ &nbsp $\frac{2}{6} * 1$ &nbsp $+$ &nbsp $\frac{4}{6} * \frac{3}{6}$ &nbsp $=$ &nbsp $\frac{2}{6}$ &nbsp $+$ &nbsp $\frac{12}{36}$ &nbsp $=$ &nbsp $\frac{2}{3}$</li>  <br><br>
+</ul>
+
+
+<h3>Strategies</h3>
+<p>For player A (the one to choose first) the best strategy would be to choose dice F. This is because it has the best overall odds, meaning if player B were to choose at
+random, they would have the best advantage and statisitically would have better odds of winning against a random dice. In the case of dice F, it has a greater chance of 
+having the high score when played against dice E or D. The probability that dice F wins against a randomly chosen dice is $\frac{1}{3}$ &nbsp $*$ &nbsp ($\frac{2}{3}$ &nbsp $+$ &nbsp $\frac{1}{3}$ &nbsp $+$ &nbsp $\frac{5}{9}$) &nbsp $=$ &nbsp $\frac{14}{27}$ or approximately <em>0.52</em>; so overall, choosing this dice, the odds are in your favour. 
+Dice E and C overall have odds of $\frac{1}{2}$ and E has the lowest odds of $\frac{13}{27}$, and so is the worst choice overall if picking first.
+</p>
+
+<p>As the second player, the best option depends on which dice the first player chooses, and can be illustrated as shown below:</p>
+
+<br>
+<div style="display: flex; justify-content: center">
+  <img src="instrasition.svg" width="400px">
+</div>
+<br>
+
+<p>Dice E has a better odd at winning 
+against D or simply put usually <em>'beats'</em> D,D <em>'beats'</em> C, C <em>'beats'</em> F and F <em>'beats'</em> E. Unlike all the other previous sets,
+where the winning odds are $\frac{2}{3}$,
+the odds of winning playing against dice D with dice F is only $\frac{5}{9}$ or approximately <em>55.6%</em>; although still likely to win,
+it is not as likely when playing dice E against dice D, so an informed player should choose E in this scenario. </p>
+
+
+<p> It should also be noted, that although in this particular set of die dice F has the overall best odds of winning as well as the largest average roll out of the set, it only matters whether the value of a face is higher or lower and not the <strong>absolute value</strong> of a face,
+i.e. if dice F had faces = [1000,1000,2,2,2,2], although it has a much higher average roll than the other die, it still has the same odds of winning against the various other die.<cite>[2]</cite>.
+
+
+    
+  </main>
+</body>
+</html>
