@@ -47,7 +47,7 @@ nav > li {
       <li><a href="rps.html">ROCK PAPER SCISSORS</a></li>
       <li><a href="penney.html">PENNEY'S GAME</a></li>
       <li><a href="dicegame.html">EFRON'S DICE</a></li>
-      <li><a href="#">REFERENCES</a></li>
+      <li><a href="references.html">REFERENCES</a></li>
     </nav>
     <section style="margin: 0px 30px; border: 2px solid purple">
       
@@ -138,17 +138,18 @@ nav > li {
       
       <p>The diagram above shows how some combinations my superior than others however there is not a supreme combinations that is above all. These are the required properties for the game to be non-transitive.</p>
 
-      <h3>Why does the method work? And how can we work out the probabilities between each pair?</h3>
+      <h3>How to work out the probability of each pair?</h3>
       
       <!-- This is example of MathJax -->
-      <p>
+      <!-- This is to be DELETED VERY SOON -->
+      <p> 
         Example of MathJax: When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
         $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
       </p>
       <!-- This is example of MathJax -->
 
 
-      <div class="maths-explanation-container" style="border: 3px solid rgb(239, 103, 176); padding: 30px;">
+      <!-- <div class="maths-explanation-container" style="border: 3px solid rgb(239, 103, 176); padding: 30px;">
         <p>To show how the method works, we are going to cover a couple of cases when this method is used with an arbitrary combination of heads or tails of length 3.</p>
         <p>Using the method we are going to generate the combination of Player 2</p>
         <p style="text-indent: 30px">\(Let \ Player1 = ABC,\) where A, B and C are eaither heads or tails. </p>
@@ -163,6 +164,45 @@ nav > li {
 
         <img src="a_equals_not_b.svg" alt="">
         <p></p>
+      </div>   -->
+
+
+      <div class="maths-explanation-container" style="border: 3px solid rgb(239, 103, 176); padding: 30px;">
+        <p>Let's take the example: HTH vs THH</p>
+        <p>We need to vizualise the flow of the game using the tree diagram</p>
+        <div style="display: flex; justify-content: center;">
+          <img src="penney-tree.svg" alt="" width="700px">
+        </div>
+        <p>We are going to work out the probability is THH winning at every step of the way.</p>
+        <p>The first easiest statements are the following</p>
+        <p>$$P(THH|THH)=1$$</p>
+        <p>$$P(THH|HTH)=0$$</p>
+        <p>Using Bayes' Theorem we can start working our way back the probability tree.</p>
+        <p>We will work out the probability of THH occuring given TH occured.</p>
+        <p>$$P(THH|TH) = P(THH|THH)P(H) + P(THH|T)P(T)$$</p>
+        <p>$$\implies P(THH|TH) = \frac{1}{2} \times 1 + \frac{1}{2}P(THH|T)$$</p>
+        <p>$$\implies P(THH|TH) = \frac{1}{2} \times 1 + \frac{1}{2}P(THH|T)$$</p>
+        <p>$$\implies P(THH|TH) = \frac{1}{2} + \frac{1}{2}P(THH|T) \quad (i)$$</p>
+        <p>We are going to repeat the same process for working out the probability of THH winning given T occurs.</p>
+        <p>$$P(THH|T) = P(THH|T)P(T) + P(THH|TH)P(H)$$</p>
+        <p>$$\implies P(THH|T) = \frac{1}{2}P(THH|T) + \frac{1}{2}P(THH|TH)$$</p>
+        <p>$$\implies P(THH|T) = P(THH|TH) \quad (ii)$$</p>
+        <p>Solving equations <i>i</i> and <i>ii</i> gives us:</p>
+        <p>$$P(THH|T) = 1$$</p>
+        <p>$$P(THH|TH) = 1$$</p>
+        <p>This makes sense from looking at the diagram, once we are at the stage where T is obtained. There are no possibilities to return to the start were HTH can start its sequence. The path either leads straight to THH or it loops back to itself.</p>
+        <p>Now let's continue by working out the probability of THH winning given HT occurs.</p>
+        <p>$$P(THH|HT) = P(THH|HTH)P(H) + P(THH|T)P(T)$$</p>
+        <p>$$\implies P(THH|HT) = \frac{1}{2} \times 0 + \frac{1}{2} \times 1$$</p>
+        <p>$$\implies P(THH|HT) = \frac{1}{2}$$</p>
+        <p>We only have 2 probabilities to work out left. Let's work out the probability of THH winning given H happens.</p>
+        <p>$$P(THH|H) = P(THH|H)P(H) + P(THH|HT)P(T)$$</p>
+        <p>$$\implies P(THH|H) = \frac{1}{2} \times P(THH|H) + \frac{1}{2} \times \frac{1}{2}$$</p>
+        <p>$$\implies P(THH|H) = \frac{1}{2}$$</p>
+        <p>Since we have the probability of THH winning when the first H and the first T is tossed, we can work out the starting probability of THH winning.</p>
+        <p>$$P(THH) = P(THH|H)P(H) + P(THH|T)P(T)$$</p>
+        <p>$$\implies P(THH) = \frac{1}{2} \times \frac{1}{2} + \frac{1}{2} \times 1$$</p>
+        <p>$$\implies P(THH) = \frac{3}{4}$$</p>
       </div>  
 
       <!-- Content ends here -->
